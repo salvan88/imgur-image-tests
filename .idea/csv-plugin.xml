@@ -59,6 +59,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\src\test\java\ru.vasiljev.a.a\PostUpdateImageTests.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
