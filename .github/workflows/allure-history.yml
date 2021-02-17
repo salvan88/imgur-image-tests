@@ -1,9 +1,10 @@
 name: allure-report
 
 on:
-  pull_request:
+  push:
     branches:
     - main
+    - release/*
 
 jobs:
   allure:
@@ -31,8 +32,8 @@ jobs:
         #id: allure-report
         with:
           allure_results: allure-results
-          #gh_pages: gh-pages
-          #allure_report: allure-report
+          gh_pages: gh-pages
+          allure_report: allure-report
           allure_history: allure-history
 
       - name: Deploy report to Github Pages
