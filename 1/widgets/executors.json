@@ -1,0 +1,10 @@
+[ {
+  "name" : "GitHub Actions",
+  "type" : "github",
+  "url" : "https://salvan88.github.io/imgur-image-tests",
+  "buildOrder" : 1,
+  "buildName" : "GitHub Actions Run #576057164",
+  "buildUrl" : "https://github.com/salvan88/imgur-image-tests/actions/runs/576057164",
+  "reportName" : "Allure Report with history",
+  "reportUrl" : "https://salvan88.github.io/imgur-image-tests/1/"
+} ]

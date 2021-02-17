@@ -1,0 +1,35 @@
+{
+  "uid" : "98d3104e051c652961429bf95fa0b5d6",
+  "children" : [ {
+    "name" : "ru.vasiljev.a.a.PostImageUpload",
+    "children" : [ {
+      "name" : "uploadFileTest()",
+      "uid" : "8a6d3334c45c6bff",
+      "parentUid" : "9ad6fe92f8b9cfaab970e4bafcb6e591",
+      "status" : "passed",
+      "time" : {
+        "start" : 1613508548581,
+        "stop" : 1613508552435,
+        "duration" : 3854
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "uploadFileSmallBmpPositiveTest()",
+      "uid" : "70d51a92e0625647",
+      "parentUid" : "9ad6fe92f8b9cfaab970e4bafcb6e591",
+      "status" : "passed",
+      "time" : {
+        "start" : 1613554571315,
+        "stop" : 1613554573677,
+        "duration" : 2362
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "9ad6fe92f8b9cfaab970e4bafcb6e591"
+  } ],
+  "name" : "suites"
+}

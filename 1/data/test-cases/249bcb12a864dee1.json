@@ -1,0 +1,90 @@
+{
+  "uid" : "249bcb12a864dee1",
+  "name" : "uploadFileSmallBmpPositiveTest()",
+  "fullName" : "ru.vasiljev.a.a.PostImageUpload.uploadFileSmallBmpPositiveTest",
+  "historyId" : "8370f863d91d59a03d90df6ac67fad45",
+  "time" : {
+    "start" : 1613554520965,
+    "stop" : 1613554524874,
+    "duration" : 3909
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "description" : "",
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "d68ab778a36c607d",
+      "name" : "Request",
+      "source" : "d68ab778a36c607d.html",
+      "type" : "text/html",
+      "size" : 481
+    }, {
+      "uid" : "d059101186046b50",
+      "name" : "HTTP/1.1 200 OK",
+      "source" : "d059101186046b50.html",
+      "type" : "text/html",
+      "size" : 2983
+    }, {
+      "uid" : "55e96b71ef690aa8",
+      "name" : "Request",
+      "source" : "55e96b71ef690aa8.html",
+      "type" : "text/html",
+      "size" : 417
+    }, {
+      "uid" : "ea2d67ba9c7607a4",
+      "name" : "HTTP/1.1 200 OK",
+      "source" : "ea2d67ba9c7607a4.html",
+      "type" : "text/html",
+      "size" : 1891
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 4,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-921Q0VG"
+  }, {
+    "name" : "thread",
+    "value" : "4520@DESKTOP-921Q0VG.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "ru.vasiljev.a.a.PostImageUpload"
+  }, {
+    "name" : "testClass",
+    "value" : "ru.vasiljev.a.a.PostImageUpload"
+  }, {
+    "name" : "testMethod",
+    "value" : "uploadFileSmallBmpPositiveTest"
+  }, {
+    "name" : "suite",
+    "value" : "ru.vasiljev.a.a.PostImageUpload"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "249bcb12a864dee1.json",
+  "parameterValues" : [ ]
+}
