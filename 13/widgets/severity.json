@@ -1,0 +1,21 @@
+[ {
+  "uid" : "c88d2b64a8e95707",
+  "name" : "uploadFileSmallBmpPositiveTest()",
+  "time" : {
+    "start" : 1613554571315,
+    "stop" : 1613554573677,
+    "duration" : 2362
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ad9e7950ae4d3c15",
+  "name" : "uploadFileTest()",
+  "time" : {
+    "start" : 1613508548581,
+    "stop" : 1613508552435,
+    "duration" : 3854
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]
