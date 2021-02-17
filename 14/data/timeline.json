@@ -6,7 +6,7 @@
       "name" : "8444@DESKTOP-921Q0VG.main(1)",
       "children" : [ {
         "name" : "uploadFileTest()",
-        "uid" : "44b16ac4483846ba",
+        "uid" : "dda92fe0f7c380f1",
         "parentUid" : "98f01f3f584e4233b21e9881e880b788",
         "status" : "passed",
         "time" : {
@@ -23,7 +23,7 @@
       "name" : "10360@DESKTOP-921Q0VG.main(1)",
       "children" : [ {
         "name" : "uploadFileSmallBmpPositiveTest()",
-        "uid" : "d9dd2da5a1426339",
+        "uid" : "334b6920ddf8b518",
         "parentUid" : "f52b9b3d6f49d56d82d8d2cef70d65f8",
         "status" : "passed",
         "time" : {
@@ -40,7 +40,7 @@
       "name" : "4520@DESKTOP-921Q0VG.main(1)",
       "children" : [ {
         "name" : "uploadFileSmallBmpPositiveTest()",
-        "uid" : "e0be0d7d04539a14",
+        "uid" : "59fcb004a08265d0",
         "parentUid" : "b96c9383418e351d1b1a8c4750c7a693",
         "status" : "passed",
         "time" : {

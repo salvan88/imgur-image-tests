@@ -4,6 +4,11 @@
   "reportName" : "Allure Report with history",
   "data" : { }
 }, {
+  "buildOrder" : 14,
+  "reportUrl" : "https://salvan88.github.io/imgur-image-tests/14/",
+  "reportName" : "Allure Report with history",
+  "data" : { }
+}, {
   "buildOrder" : 1,
   "reportUrl" : "https://salvan88.github.io/imgur-image-tests/1/",
   "reportName" : "Allure Report with history",

@@ -1,5 +1,5 @@
 [ {
-  "uid" : "44b16ac4483846ba",
+  "uid" : "dda92fe0f7c380f1",
   "name" : "uploadFileTest()",
   "time" : {
     "start" : 1613508548581,
@@ -9,7 +9,7 @@
   "status" : "passed",
   "severity" : "normal"
 }, {
-  "uid" : "d9dd2da5a1426339",
+  "uid" : "334b6920ddf8b518",
   "name" : "uploadFileSmallBmpPositiveTest()",
   "time" : {
     "start" : 1613554571315,
