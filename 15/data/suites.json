@@ -4,7 +4,7 @@
     "name" : "ru.vasiljev.a.a.PostImageUpload",
     "children" : [ {
       "name" : "uploadFileTest()",
-      "uid" : "d04cbe5448ff56c2",
+      "uid" : "329bf36d0a7dea18",
       "parentUid" : "9ad6fe92f8b9cfaab970e4bafcb6e591",
       "status" : "passed",
       "time" : {
@@ -17,7 +17,7 @@
       "parameters" : [ ]
     }, {
       "name" : "uploadFileSmallBmpPositiveTest()",
-      "uid" : "10eab2119fb14344",
+      "uid" : "d98532735d02c7c2",
       "parentUid" : "9ad6fe92f8b9cfaab970e4bafcb6e591",
       "status" : "passed",
       "time" : {
