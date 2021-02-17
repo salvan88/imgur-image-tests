@@ -4,15 +4,21 @@ name: Allure Report with history
   uses: simple-elf/allure-report-action@v1.3
   with:
     # Allure test result data dir
-    allure_results: # default is allure-results
+    allure_results: allure results # default is allure-results
     # Allure report target dir
-    allure_report: # default is allure-report
+    allure_report:  allure_report # default is allure-report
     # Allure commandline version
     allure_version: # default is 2.13.6
     # Folder with gh-pages branch
-    gh_pages: # default is gh-pages
+  - name: Get Allure history           # default is gh-pages
+        uses: actions/checkout@v2
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages 
     # Folder for allure history
-    allure_history: # default is allure-history
+    allure_history: allure-history # default is allure-history
     # subfolder
     subfolder: # optional, default is 
     # GitHub Actions build number
@@ -23,3 +29,10 @@ name: Allure Report with history
     github_repo: # default is ${{ github.repository }}
     # GitHub repository owner
     github_repo_owner: # default is ${{ github.repository_owner }}
+    - name: Deploy report to Github Pages
+  if: always()
+  uses: peaceiris/actions-gh-pages@v2
+  env:
+    PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    PUBLISH_BRANCH: gh-pages
+    PUBLISH_DIR: allure-history
