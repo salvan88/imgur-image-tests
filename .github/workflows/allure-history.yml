@@ -1,12 +1,9 @@
 name: allure-report
 
 on:
-  release:
-    types:
-      - created
-  push:
-    branches-ignore:
-      - '!master'
+  pull_request:
+    branches:
+    - main
 
 jobs:
   allure:
@@ -27,7 +24,7 @@ jobs:
         with:
           ref: gh-pages
           path: gh-pages
-
+  
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
         if: always()
