@@ -30,7 +30,7 @@ public class PostImageUploadTest extends BaseTest {
     /** Позитивные тесты **/
 
     @Test
-    @DisplayName("Изображение(JPG) передача в Base64 меньше 10 Мб")
+    @DisplayName("(+) Изображение(JPG) передача в Base64 меньше 10 Мб")
     void uploadFile10JpgBase64PositiveTest() {
         delImageHash = given()
                 .headers("Authorization", token)
@@ -50,7 +50,7 @@ public class PostImageUploadTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Изображение(BMP) передача файлом в 1 pix")
+    @DisplayName("(+) Изображение(BMP) передача файлом в 1 pix")
     @Description("Ошибка несовпадения загруженного типа изображения")
     void uploadFileSmallBmpPositiveTest() {
         delImageHash = given()
@@ -72,7 +72,7 @@ public class PostImageUploadTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Изображение(GIF) передача URL меньше 10Мб")
+    @DisplayName("(+) Изображение(GIF) передача URL меньше 10Мб")
     void uploadFileGifUrlPositiveTest() {
         delImageHash = given()
                 .headers("Authorization", token)
@@ -96,7 +96,7 @@ public class PostImageUploadTest extends BaseTest {
     /** Негативные тесты **/
 
     @Test
-    @DisplayName("Изображение(BMP) передача файлом больше 10Мб")
+    @DisplayName("(-) Изображение(BMP) передача файлом больше 10Мб")
     void uploadFile11MbNegativeTest() {
         given()
                 .headers("Authorization", token)
@@ -111,7 +111,7 @@ public class PostImageUploadTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Аудио файл(MP3) передача файлом меньше 10Мб")
+    @DisplayName("(-) Аудио файл(MP3) передача файлом меньше 10Мб")
     void uploadFileMp3NegativeTest() {
         given()
                 .headers("Authorization", token)
@@ -126,7 +126,7 @@ public class PostImageUploadTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Текстовый файл(PDF) передача файлом меньше 10Мб")
+    @DisplayName("(-) Текстовый файл(PDF) передача файлом меньше 10Мб")
     void uploadFilePdfNegativeTest() {
         given()
                 .headers("Authorization", token)
@@ -141,7 +141,7 @@ public class PostImageUploadTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Видео файл(MP4) передача файлом меньше 10Мб")
+    @DisplayName("(-) Видео файл(MP4) передача файлом меньше 10Мб")
     void uploadFileSmallMp4NegativeTest() {
         given()
                 .headers("Authorization", token)
@@ -156,7 +156,7 @@ public class PostImageUploadTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Текстовый файл(BMP) передача файлом")
+    @DisplayName("(-) Текстовый файл(BMP) передача файлом")
     void uploadFileTxtInBmpFormatNegativeTest() {
         given()
                 .headers("Authorization", token)

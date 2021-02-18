@@ -31,7 +31,7 @@ public class DeleteImageTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Удаление неавторизованным пользователем")
+    @DisplayName("(-) Удаление неавторизованным пользователем")
     void deleteImageNoAuthedTest() {
         given()
                 .expect()
@@ -45,7 +45,7 @@ public class DeleteImageTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Удаление авторизованным пользователем")
+    @DisplayName("(+) Удаление авторизованным пользователем")
     void deleteImageAuthedTest() {
         given()
                 .headers("Authorization", token)

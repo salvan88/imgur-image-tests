@@ -34,7 +34,7 @@ public class PostUpdateImageTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Обновить title у изображения (authed)")
+    @DisplayName("(+) Обновить title у изображения (authed)")
     void postUpdateImageTitleAuthedTest() {
         given()
                 .headers("Authorization", token)
@@ -50,7 +50,7 @@ public class PostUpdateImageTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Обновить description у изображения (authed)")
+    @DisplayName("(+) Обновить description у изображения (authed)")
     void postUpdateImageDescriptionAuthedTest() {
         given()
                 .headers("Authorization", token)
@@ -65,7 +65,7 @@ public class PostUpdateImageTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Обновить description у изображения (un-authed)")
+    @DisplayName("(-) Обновить description у изображения (un-authed)")
     void postUpdateImageDescriptionUnAuthedTest() {
         given()
                 .multiPart("description", "321")
