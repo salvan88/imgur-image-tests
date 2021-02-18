@@ -1,20 +1,20 @@
 [ {
-  "uid" : "d98c612632194c46",
-  "name" : "uploadFileTest()",
-  "time" : {
-    "start" : 1613508548581,
-    "stop" : 1613508552435,
-    "duration" : 3854
-  },
-  "status" : "passed",
-  "severity" : "normal"
-}, {
-  "uid" : "303f78d7344e3e50",
+  "uid" : "6dfacc68b91c7cf5",
   "name" : "uploadFileSmallBmpPositiveTest()",
   "time" : {
     "start" : 1613554571315,
     "stop" : 1613554573677,
     "duration" : 2362
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c54f91cf303c90ed",
+  "name" : "uploadFileTest()",
+  "time" : {
+    "start" : 1613508548581,
+    "stop" : 1613508552435,
+    "duration" : 3854
   },
   "status" : "passed",
   "severity" : "normal"

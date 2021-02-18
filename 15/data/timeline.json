@@ -3,10 +3,27 @@
   "children" : [ {
     "name" : "DESKTOP-921Q0VG",
     "children" : [ {
+      "name" : "10360@DESKTOP-921Q0VG.main(1)",
+      "children" : [ {
+        "name" : "uploadFileSmallBmpPositiveTest()",
+        "uid" : "6dfacc68b91c7cf5",
+        "parentUid" : "f52b9b3d6f49d56d82d8d2cef70d65f8",
+        "status" : "passed",
+        "time" : {
+          "start" : 1613554571315,
+          "stop" : 1613554573677,
+          "duration" : 2362
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "f52b9b3d6f49d56d82d8d2cef70d65f8"
+    }, {
       "name" : "4520@DESKTOP-921Q0VG.main(1)",
       "children" : [ {
         "name" : "uploadFileSmallBmpPositiveTest()",
-        "uid" : "9a728e1f45af0c53",
+        "uid" : "9d25cf9f96d45844",
         "parentUid" : "b96c9383418e351d1b1a8c4750c7a693",
         "status" : "passed",
         "time" : {
@@ -23,7 +40,7 @@
       "name" : "8444@DESKTOP-921Q0VG.main(1)",
       "children" : [ {
         "name" : "uploadFileTest()",
-        "uid" : "d98c612632194c46",
+        "uid" : "c54f91cf303c90ed",
         "parentUid" : "98f01f3f584e4233b21e9881e880b788",
         "status" : "passed",
         "time" : {
@@ -36,23 +53,6 @@
         "parameters" : [ ]
       } ],
       "uid" : "98f01f3f584e4233b21e9881e880b788"
-    }, {
-      "name" : "10360@DESKTOP-921Q0VG.main(1)",
-      "children" : [ {
-        "name" : "uploadFileSmallBmpPositiveTest()",
-        "uid" : "303f78d7344e3e50",
-        "parentUid" : "f52b9b3d6f49d56d82d8d2cef70d65f8",
-        "status" : "passed",
-        "time" : {
-          "start" : 1613554571315,
-          "stop" : 1613554573677,
-          "duration" : 2362
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "parameters" : [ ]
-      } ],
-      "uid" : "f52b9b3d6f49d56d82d8d2cef70d65f8"
     } ],
     "uid" : "0a393c6cbb9366dd617607a433926429"
   } ],
