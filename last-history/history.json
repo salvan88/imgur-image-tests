@@ -4,11 +4,20 @@
       "failed" : 0,
       "broken" : 0,
       "skipped" : 0,
-      "passed" : 10,
+      "passed" : 11,
       "unknown" : 0,
-      "total" : 10
+      "total" : 11
     },
     "items" : [ {
+      "uid" : "7c637b6b1b5180c8",
+      "reportUrl" : "https://salvan88.github.io/imgur-image-tests/15//#testresult/7c637b6b1b5180c8",
+      "status" : "passed",
+      "time" : {
+        "start" : 1613508548581,
+        "stop" : 1613508552435,
+        "duration" : 3854
+      }
+    }, {
       "uid" : "c54f91cf303c90ed",
       "reportUrl" : "https://salvan88.github.io/imgur-image-tests/15//#testresult/c54f91cf303c90ed",
       "status" : "passed",
@@ -105,11 +114,20 @@
       "failed" : 0,
       "broken" : 0,
       "skipped" : 0,
-      "passed" : 10,
+      "passed" : 11,
       "unknown" : 0,
-      "total" : 10
+      "total" : 11
     },
     "items" : [ {
+      "uid" : "e18f4ee845fcf485",
+      "reportUrl" : "https://salvan88.github.io/imgur-image-tests/15//#testresult/e18f4ee845fcf485",
+      "status" : "passed",
+      "time" : {
+        "start" : 1613554571315,
+        "stop" : 1613554573677,
+        "duration" : 2362
+      }
+    }, {
       "uid" : "6dfacc68b91c7cf5",
       "reportUrl" : "https://salvan88.github.io/imgur-image-tests/15//#testresult/6dfacc68b91c7cf5",
       "status" : "passed",
