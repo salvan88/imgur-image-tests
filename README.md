@@ -1,3 +1,2 @@
 # imgur-image-tests
-https://salvan88.github.io/imgur-image-tests/
-![Screenshot](screenshot.png)
+![Image alt](https://github.com/salvan88/imgur-image-tests/raw/master/screenshots/Behaviors.png)
