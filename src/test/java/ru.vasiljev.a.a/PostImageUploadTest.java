@@ -1,6 +1,7 @@
 package ru.vasiljev.a.a;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -30,6 +31,7 @@ public class PostImageUploadTest extends BaseTest {
     /** Позитивные тесты **/
 
     @Test
+    @Step("Тест")
     @DisplayName("(+) Изображение(JPG) передача в Base64 меньше 10 Мб")
     void uploadFile10JpgBase64PositiveTest() {
         delImageHash = given()
@@ -50,6 +52,7 @@ public class PostImageUploadTest extends BaseTest {
     }
 
     @Test
+    @Step("Тест")
     @DisplayName("(+) Изображение(BMP) передача файлом в 1 pix")
     @Description("Ошибка несовпадения загруженного типа изображения")
     void uploadFileSmallBmpPositiveTest() {
@@ -72,6 +75,7 @@ public class PostImageUploadTest extends BaseTest {
     }
 
     @Test
+    @Step("Тест")
     @DisplayName("(+) Изображение(GIF) передача URL меньше 10Мб")
     void uploadFileGifUrlPositiveTest() {
         delImageHash = given()
@@ -96,6 +100,7 @@ public class PostImageUploadTest extends BaseTest {
     /** Негативные тесты **/
 
     @Test
+    @Step("Тест")
     @DisplayName("(-) Изображение(BMP) передача файлом больше 10Мб")
     void uploadFile11MbNegativeTest() {
         given()
@@ -111,6 +116,7 @@ public class PostImageUploadTest extends BaseTest {
     }
 
     @Test
+    @Step("Тест")
     @DisplayName("(-) Аудио файл(MP3) передача файлом меньше 10Мб")
     void uploadFileMp3NegativeTest() {
         given()
@@ -126,6 +132,7 @@ public class PostImageUploadTest extends BaseTest {
     }
 
     @Test
+    @Step("Тест")
     @DisplayName("(-) Текстовый файл(PDF) передача файлом меньше 10Мб")
     void uploadFilePdfNegativeTest() {
         given()
@@ -141,6 +148,7 @@ public class PostImageUploadTest extends BaseTest {
     }
 
     @Test
+    @Step("Тест")
     @DisplayName("(-) Видео файл(MP4) передача файлом меньше 10Мб")
     void uploadFileSmallMp4NegativeTest() {
         given()
@@ -156,6 +164,7 @@ public class PostImageUploadTest extends BaseTest {
     }
 
     @Test
+    @Step("Тест")
     @DisplayName("(-) Текстовый файл(BMP) передача файлом")
     void uploadFileTxtInBmpFormatNegativeTest() {
         given()
@@ -171,6 +180,7 @@ public class PostImageUploadTest extends BaseTest {
     }
 
     @AfterEach
+    @Step("Удаление мусора")
     @DisplayName("Удаление мусора")
     void tearDown() {
         if(delImageHash != null) {

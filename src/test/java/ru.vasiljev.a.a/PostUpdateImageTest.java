@@ -1,10 +1,10 @@
 package ru.vasiljev.a.a;
 
+import io.qameta.allure.Step;
+import io.qameta.allure.restassured.AllureRestAssured;
+import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
@@ -16,9 +16,12 @@ public class PostUpdateImageTest extends BaseTest {
     private String delImageHash;
     private final String imageURL = "https://is.gd/fqQYK4";
 
+
     @BeforeEach
+    @Step("Подготовка")
     void setUp() {
         JsonPath result = given()
+                .filter(new AllureRestAssured())
                 .headers("Authorization", token)
                 .multiPart("image", imageURL)
                 .when()
@@ -34,9 +37,11 @@ public class PostUpdateImageTest extends BaseTest {
     }
 
     @Test
+    @Step("Тест")
     @DisplayName("(+) Обновить title у изображения (authed)")
     void postUpdateImageTitleAuthedTest() {
         given()
+                .filter(new AllureRestAssured())
                 .headers("Authorization", token)
                 .multiPart("title", "123")
                 .expect()
@@ -50,9 +55,11 @@ public class PostUpdateImageTest extends BaseTest {
     }
 
     @Test
+    @Step("Тест")
     @DisplayName("(+) Обновить description у изображения (authed)")
     void postUpdateImageDescriptionAuthedTest() {
         given()
+                .filter(new AllureRestAssured())
                 .headers("Authorization", token)
                 .multiPart("description", "321")
                 .expect()
@@ -65,9 +72,11 @@ public class PostUpdateImageTest extends BaseTest {
     }
 
     @Test
+    @Step("Тест")
     @DisplayName("(-) Обновить description у изображения (un-authed)")
     void postUpdateImageDescriptionUnAuthedTest() {
         given()
+                .filter(new AllureRestAssured())
                 .multiPart("description", "321")
                 .expect()
                 .body("success", is(false))
@@ -80,9 +89,11 @@ public class PostUpdateImageTest extends BaseTest {
     }
 
     @AfterEach
+    @Step("Удаление мусора")
     @DisplayName("Удаление мусора")
     void tearDown() {
         given()
+                .filter(new AllureRestAssured())
                 .headers("Authorization", token)
                 .when()
                 .delete("/image/{delImageHash}", delImageHash)

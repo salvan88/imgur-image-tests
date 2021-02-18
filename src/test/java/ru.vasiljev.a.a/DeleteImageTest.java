@@ -1,9 +1,8 @@
 package ru.vasiljev.a.a;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import io.qameta.allure.Step;
+import io.qameta.allure.restassured.AllureRestAssured;
+import org.junit.jupiter.api.*;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
@@ -16,8 +15,10 @@ public class DeleteImageTest extends BaseTest {
     private final String imageURL = "https://is.gd/fqQYK4";
 
     @BeforeEach
+    @Step("Подготовка")
     void setUp() {
         delImageHash = given()
+                .filter(new AllureRestAssured())
                 .headers("Authorization", token)
                 .multiPart("image", imageURL)
                 .when()
@@ -31,9 +32,11 @@ public class DeleteImageTest extends BaseTest {
     }
 
     @Test
+    @Step("Тест")
     @DisplayName("(-) Удаление неавторизованным пользователем")
     void deleteImageNoAuthedTest() {
         given()
+                .filter(new AllureRestAssured())
                 .expect()
                 .body("data", is(notNullValue()))
                 .body("success", is(false))
@@ -45,9 +48,11 @@ public class DeleteImageTest extends BaseTest {
     }
 
     @Test
+    @Step("Тест")
     @DisplayName("(+) Удаление авторизованным пользователем")
     void deleteImageAuthedTest() {
         given()
+                .filter(new AllureRestAssured())
                 .headers("Authorization", token)
                 .expect()
                 .body("data", is(true))
@@ -60,9 +65,11 @@ public class DeleteImageTest extends BaseTest {
     }
 
     @AfterEach
+    @Step("Удаление мусора")
     @DisplayName("Удаление мусора")
     void tearDown() {
             given()
+                    .filter(new AllureRestAssured())
                     .headers("Authorization", token)
                     .when()
                     .delete("/image/{delImageHash}", delImageHash)

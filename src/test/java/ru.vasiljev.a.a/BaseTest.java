@@ -1,5 +1,6 @@
 package ru.vasiljev.a.a;
 
+import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
@@ -22,7 +23,6 @@ public class BaseTest {
         username = prop.getProperty("username");
 
         RestAssured.baseURI = prop.getProperty("base.url");
-        RestAssured.filters(new AllureRestAssured());
     }
 
     static void loadProperties()  {
