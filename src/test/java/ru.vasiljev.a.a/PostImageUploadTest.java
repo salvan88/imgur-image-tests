@@ -2,6 +2,7 @@ package ru.vasiljev.a.a;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
+import io.qameta.allure.restassured.AllureRestAssured;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -35,6 +36,7 @@ public class PostImageUploadTest extends BaseTest {
     @DisplayName("(+) Изображение(JPG) передача в Base64 меньше 10 Мб")
     void uploadFile10JpgBase64PositiveTest() {
         delImageHash = given()
+                .filter(new AllureRestAssured())
                 .headers("Authorization", token)
                 .multiPart("image", getFileByteContent(smallJpg))
                 .expect()
@@ -57,6 +59,7 @@ public class PostImageUploadTest extends BaseTest {
     @Description("Ошибка несовпадения загруженного типа изображения")
     void uploadFileSmallBmpPositiveTest() {
         delImageHash = given()
+                .filter(new AllureRestAssured())
                 .headers("Authorization", token)
                 .multiPart("image", new File(getFilePathContent(smallBmpExample)))
                 .expect()
@@ -79,6 +82,7 @@ public class PostImageUploadTest extends BaseTest {
     @DisplayName("(+) Изображение(GIF) передача URL меньше 10Мб")
     void uploadFileGifUrlPositiveTest() {
         delImageHash = given()
+                .filter(new AllureRestAssured())
                 .headers("Authorization", token)
                 .multiPart("image", "https://99px.ru/sstorage/86/2017/08/image_861808171630169389226.gif")
                 .expect()
@@ -104,6 +108,7 @@ public class PostImageUploadTest extends BaseTest {
     @DisplayName("(-) Изображение(BMP) передача файлом больше 10Мб")
     void uploadFile11MbNegativeTest() {
         given()
+                .filter(new AllureRestAssured())
                 .headers("Authorization", token)
                 .multiPart("image", new File(getFilePathContent(bigImageFile)))
                 .expect()
@@ -120,6 +125,7 @@ public class PostImageUploadTest extends BaseTest {
     @DisplayName("(-) Аудио файл(MP3) передача файлом меньше 10Мб")
     void uploadFileMp3NegativeTest() {
         given()
+                .filter(new AllureRestAssured())
                 .headers("Authorization", token)
                 .multiPart("image", new File(getFilePathContent(audioFile)))
                 .expect()
@@ -136,6 +142,7 @@ public class PostImageUploadTest extends BaseTest {
     @DisplayName("(-) Текстовый файл(PDF) передача файлом меньше 10Мб")
     void uploadFilePdfNegativeTest() {
         given()
+                .filter(new AllureRestAssured())
                 .headers("Authorization", token)
                 .multiPart("image", new File(getFilePathContent(pdfFile)))
                 .expect()
@@ -152,6 +159,7 @@ public class PostImageUploadTest extends BaseTest {
     @DisplayName("(-) Видео файл(MP4) передача файлом меньше 10Мб")
     void uploadFileSmallMp4NegativeTest() {
         given()
+                .filter(new AllureRestAssured())
                 .headers("Authorization", token)
                 .multiPart("image", new File(getFilePathContent(videoFile)))
                 .expect()
@@ -168,6 +176,7 @@ public class PostImageUploadTest extends BaseTest {
     @DisplayName("(-) Текстовый файл(BMP) передача файлом")
     void uploadFileTxtInBmpFormatNegativeTest() {
         given()
+                .filter(new AllureRestAssured())
                 .headers("Authorization", token)
                 .multiPart("image", new File(getFilePathContent(txtFile)))
                 .expect()
@@ -185,6 +194,7 @@ public class PostImageUploadTest extends BaseTest {
     void tearDown() {
         if(delImageHash != null) {
             given()
+                    .filter(new AllureRestAssured())
                     .headers("Authorization", token)
                     .when()
                     .delete("/image/{delImageHash}", delImageHash)
