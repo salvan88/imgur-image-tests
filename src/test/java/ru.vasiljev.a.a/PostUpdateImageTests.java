@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
+@DisplayName("POST update image test case")
 public class PostUpdateImageTests extends BaseTest {
 
     private String imageHash;
@@ -33,11 +34,26 @@ public class PostUpdateImageTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Обновить title у изображения")
-    void getImageExistTest() {
+    @DisplayName("Обновить title у изображения (authed)")
+    void postUpdateImageTitleAuthedTest() {
         given()
                 .headers("Authorization", token)
                 .multiPart("title", "123")
+                .expect()
+                .body("success", is(true))
+                .when()
+                .post("/image/{imageHash}", imageHash)
+                .prettyPeek()
+                .then()
+                .statusCode(200);
+
+    }
+
+    @Test
+    @DisplayName("Обновить description у изображения (authed)")
+    void postUpdateImageDescriptionAuthedTest() {
+        given()
+                .headers("Authorization", token)
                 .multiPart("description", "321")
                 .expect()
                 .body("success", is(true))
@@ -46,6 +62,20 @@ public class PostUpdateImageTests extends BaseTest {
                 .prettyPeek()
                 .then()
                 .statusCode(200);
+    }
+
+    @Test
+    @DisplayName("Обновить description у изображения (un-authed)")
+    void postUpdateImageDescriptionUnAuthedTest() {
+        given()
+                .multiPart("description", "321")
+                .expect()
+                .body("success", is(false))
+                .when()
+                .post("/image/{imageHash}", imageHash)
+                .prettyPeek()
+                .then()
+                .statusCode(401);
 
     }
 
