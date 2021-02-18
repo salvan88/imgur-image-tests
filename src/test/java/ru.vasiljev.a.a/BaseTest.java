@@ -1,7 +1,5 @@
 package ru.vasiljev.a.a;
 
-import io.qameta.allure.Step;
-import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
 
