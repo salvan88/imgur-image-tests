@@ -32,7 +32,7 @@ public class GetImageTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("(+) GET изображение")
+    @DisplayName("(+) Получение изображения")
     void getImageExistTest() {
         delImageHash = given()
                 .headers("Authorization", token)
