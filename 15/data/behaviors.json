@@ -2,7 +2,7 @@
   "uid" : "b1a8273437954620fa374b796ffaacdd",
   "children" : [ {
     "name" : "uploadFileTest()",
-    "uid" : "aecc5dd22f25cb98",
+    "uid" : "37613015a5511a52",
     "parentUid" : "b1a8273437954620fa374b796ffaacdd",
     "status" : "passed",
     "time" : {
@@ -15,7 +15,7 @@
     "parameters" : [ ]
   }, {
     "name" : "uploadFileSmallBmpPositiveTest()",
-    "uid" : "d4748e9a8f55824a",
+    "uid" : "21ba1d2f1a6c7e3f",
     "parentUid" : "b1a8273437954620fa374b796ffaacdd",
     "status" : "passed",
     "time" : {
