@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 @DisplayName("GET image test case")
-public class GetImageTests extends BaseTest {
+public class GetImageTest extends BaseTest {
 
     private String imageHash;
     private String delImageHash;

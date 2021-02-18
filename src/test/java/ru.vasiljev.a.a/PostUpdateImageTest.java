@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
 @DisplayName("POST update image test case")
-public class PostUpdateImageTests extends BaseTest {
+public class PostUpdateImageTest extends BaseTest {
 
     private String imageHash;
     private String delImageHash;

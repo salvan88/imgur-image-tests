@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 @DisplayName("DELETE image test case")
-public class DeleteImageTests extends BaseTest {
+public class DeleteImageTest extends BaseTest {
 
     private String delImageHash;
     private final String imageURL = "https://is.gd/fqQYK4";

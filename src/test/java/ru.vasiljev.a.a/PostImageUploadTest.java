@@ -16,7 +16,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 @DisplayName("POST upload image test case")
-public class PostImageUploadTests extends BaseTest {
+public class PostImageUploadTest extends BaseTest {
 
     private final String smallJpg = "bob.jpg";
     private final String smallBmpExample = "1.bmp";
