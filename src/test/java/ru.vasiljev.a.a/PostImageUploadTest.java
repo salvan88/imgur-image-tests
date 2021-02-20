@@ -3,10 +3,13 @@ package ru.vasiljev.a.a;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
+import io.restassured.specification.MultiPartSpecification;
+import io.restassured.specification.RequestSpecification;
 import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import ru.valijev.a.a.Endpoints;
+import ru.valijev.a.a.dto.PostImageUploadResponse;
+import ru.valijev.a.a.Images;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,43 +17,46 @@ import java.util.Base64;
 import java.util.Objects;
 
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
 
 @DisplayName("POST upload image test case")
 public class PostImageUploadTest extends BaseTest {
 
-    private final String smallJpg = "bob.jpg";
-    private final String smallBmpExample = "1.bmp";
-    private final String audioFile = "testAudioExample.mp3";
-    private final String pdfFile = "pdfExample.pdf";
-    private final String videoFile = "videoExample(8mb).mp4";
-    private final String txtFile = "txtFileInBmpFormat.bmp";
-    private final String bigImageFile = "11mb.bmp";
+    private PostImageUploadResponse response;
     private String delImageHash;
+    MultiPartSpecification multiPartSpec;
+    RequestSpecification uploadReqSpec;
 
-    /** Позитивные тесты **/
+//    @BeforeEach
+//    void setUp() {
+//        multiPartSpec = new MultiPartSpecBuilder(fileContent)
+//                .controlName("image")
+//                .build();
+//        uploadReqSpec = reqAuthSpec.multiPart(multiPartSpec);
+//    }
+
+    /**
+     * Позитивные тесты
+     **/
 
     @Test
     @Step("Тест")
     @DisplayName("(+) Изображение(JPG) передача в Base64 меньше 10 Мб")
     void uploadFile10JpgBase64PositiveTest() {
-        delImageHash = given()
+        response = given()
                 .filter(new AllureRestAssured())
-                .headers("Authorization", token)
-                .multiPart("image", getFileByteContent(smallJpg))
-                .expect()
-                .body("success", is(true))
-                .body("data.type", is("image/jpeg"))
-                .body("data.id", is(notNullValue()))
+                .spec(reqAuthSpec)
+                .multiPart("image", getFileByteContent(Images.smallJpg.path))
                 .when()
-                .post("/image")
+                .post(Endpoints.POST_IMAGE_REQUEST)
                 .prettyPeek()
                 .then()
                 .extract()
-                .response()
-                .jsonPath()
-                .getString("data.deletehash");
+                .body()
+                .as(PostImageUploadResponse.class);
+
+        assertThat(response.getData().getType()).isEqualTo("image/jpeg");
     }
 
     @Test
@@ -58,50 +64,45 @@ public class PostImageUploadTest extends BaseTest {
     @DisplayName("(+) Изображение(BMP) передача файлом в 1 pix")
     @Description("Ошибка несовпадения загруженного типа изображения")
     void uploadFileSmallBmpPositiveTest() {
-        delImageHash = given()
+        response = given()
                 .filter(new AllureRestAssured())
-                .headers("Authorization", token)
-                .multiPart("image", new File(getFilePathContent(smallBmpExample)))
-                .expect()
-                .body("success", is(true))
-                .body("data.type", is("image/bmp"))
-                .body("data.id", is(notNullValue()))
+                .spec(reqAuthSpec)
+                .multiPart("image", new File(Images.smallBmpExample.path))
                 .when()
-                .post("/image")
+                .post(Endpoints.POST_IMAGE_REQUEST)
                 .prettyPeek()
                 .then()
-                .statusCode(200)
                 .extract()
-                .response()
-                .jsonPath()
-                .getString("data.deletehash");
+                .body()
+                .as(PostImageUploadResponse.class);
+
+        assertThat(response.getData().getType()).isEqualTo("image/bmp");
     }
 
     @Test
     @Step("Тест")
     @DisplayName("(+) Изображение(GIF) передача URL меньше 10Мб")
     void uploadFileGifUrlPositiveTest() {
-        delImageHash = given()
+        response = given()
                 .filter(new AllureRestAssured())
-                .headers("Authorization", token)
-                .multiPart("image", "https://99px.ru/sstorage/86/2017/08/image_861808171630169389226.gif")
-                .expect()
-                .body("success", is(true))
-                .body("data.type", is("image/gif"))
-                .body("data.id", is(notNullValue()))
-                .body("data.animated", is(true))
+                .spec(reqAuthSpec)
+                .multiPart("image", new File(Images.gifExample.path))
                 .when()
-                .post("/image")
+                .post(Endpoints.POST_IMAGE_REQUEST)
                 .prettyPeek()
                 .then()
-                .statusCode(200)
+                .spec(respPosSpec)
                 .extract()
-                .response()
-                .jsonPath()
-                .getString("data.deletehash");
+                .body()
+                .as(PostImageUploadResponse.class);
+
+//        assertThat(response.getData().getType()).isEqualTo("image/gif");
+//        assertThat(response.getData().getAnimated()).isEqualTo(true);
     }
 
-    /** Негативные тесты **/
+    /**
+     * Негативные тесты
+     **/
 
     @Test
     @Step("Тест")
@@ -109,15 +110,15 @@ public class PostImageUploadTest extends BaseTest {
     void uploadFile11MbNegativeTest() {
         given()
                 .filter(new AllureRestAssured())
-                .headers("Authorization", token)
-                .multiPart("image", new File(getFilePathContent(bigImageFile)))
+                .spec(reqAuthSpec)
+                .multiPart("image", new File(Images.bigImageFile.path))
                 .expect()
-                .body("success", is(false))
+                .body("data.error", is("File is over the size limit"))
                 .when()
-                .post("/image")
+                .post(Endpoints.POST_IMAGE_REQUEST)
                 .prettyPeek()
                 .then()
-                .statusCode(400);
+                .spec(respNegSpec);
     }
 
     @Test
@@ -126,15 +127,13 @@ public class PostImageUploadTest extends BaseTest {
     void uploadFileMp3NegativeTest() {
         given()
                 .filter(new AllureRestAssured())
-                .headers("Authorization", token)
-                .multiPart("image", new File(getFilePathContent(audioFile)))
-                .expect()
-                .body("success", is(false))
+                .spec(reqAuthSpec)
+                .multiPart("image", new File(Images.audioFile.path))
                 .when()
-                .post("/image")
+                .post(Endpoints.POST_IMAGE_REQUEST)
                 .prettyPeek()
                 .then()
-                .statusCode(400);
+                .spec(respNegSpec);
     }
 
     @Test
@@ -143,15 +142,13 @@ public class PostImageUploadTest extends BaseTest {
     void uploadFilePdfNegativeTest() {
         given()
                 .filter(new AllureRestAssured())
-                .headers("Authorization", token)
-                .multiPart("image", new File(getFilePathContent(pdfFile)))
-                .expect()
-                .body("success", is(false))
+                .spec(reqAuthSpec)
+                .multiPart("image", new File(Images.pdfFile.path))
                 .when()
-                .post("/image")
+                .post(Endpoints.POST_IMAGE_REQUEST)
                 .prettyPeek()
                 .then()
-                .statusCode(400);
+                .spec(respNegSpec);
     }
 
     @Test
@@ -160,15 +157,13 @@ public class PostImageUploadTest extends BaseTest {
     void uploadFileSmallMp4NegativeTest() {
         given()
                 .filter(new AllureRestAssured())
-                .headers("Authorization", token)
-                .multiPart("image", new File(getFilePathContent(videoFile)))
-                .expect()
-                .body("success", is(false))
+                .spec(reqAuthSpec)
+                .multiPart("image", new File(Images.videoFile.path))
                 .when()
-                .post("/image")
+                .post(Endpoints.POST_IMAGE_REQUEST)
                 .prettyPeek()
                 .then()
-                .statusCode(400);
+                .spec(respNegSpec);
     }
 
     @Test
@@ -177,15 +172,13 @@ public class PostImageUploadTest extends BaseTest {
     void uploadFileTxtInBmpFormatNegativeTest() {
         given()
                 .filter(new AllureRestAssured())
-                .headers("Authorization", token)
-                .multiPart("image", new File(getFilePathContent(txtFile)))
-                .expect()
-                .body("success", is(false))
+                .spec(reqAuthSpec)
+                .multiPart("image", new File(Images.txtFile.path))
                 .when()
-                .post("/image")
+                .post(Endpoints.POST_IMAGE_REQUEST)
                 .prettyPeek()
                 .then()
-                .statusCode(400);
+                .spec(respNegSpec);
     }
 
     @AfterEach
@@ -195,16 +188,19 @@ public class PostImageUploadTest extends BaseTest {
         if(delImageHash != null) {
             given()
                     .filter(new AllureRestAssured())
-                    .headers("Authorization", token)
+                    .spec(reqAuthSpec)
                     .when()
-                    .delete("/image/{delImageHash}", delImageHash)
+                    .delete(Endpoints.DELETE_IMAGE_REQUEST, delImageHash)
                     .prettyPeek()
                     .then()
                     .statusCode(200);
         }
     }
 
-    private String getFileByteContent(String str)  {
+    private String getFileByteContent(String str) {
+        File f = new File(str);
+        str = f.getName();
+
         ClassLoader classLoader = getClass().getClassLoader();
         File inputFile = new File(Objects.requireNonNull(classLoader.getResource(str)).getFile());
 
@@ -217,10 +213,10 @@ public class PostImageUploadTest extends BaseTest {
         return Base64.getEncoder().encodeToString(fileContent);
     }
 
-    private String getFilePathContent(String str) {
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(Objects.requireNonNull(classLoader.getResource(str)).getFile());
-        return file.getAbsolutePath();
-    }
+//    private String getFilePathContent(String str) {
+//        ClassLoader classLoader = getClass().getClassLoader();
+//        File file = new File(Objects.requireNonNull(classLoader.getResource(str)).getFile());
+//        return file.getAbsolutePath();
+//    }
 
 }

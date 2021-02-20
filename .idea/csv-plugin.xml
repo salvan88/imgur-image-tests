@@ -31,6 +31,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\src\test\java\ru.vasiljev.a.a\GetImageTest.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\src\test\java\ru.vasiljev.a.a\GetImageTests.java">
           <value>
             <Attribute>
@@ -53,6 +60,13 @@
           </value>
         </entry>
         <entry key="\src\test\java\ru.vasiljev.a.a\PostImageUploadPositiveTests.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\src\test\java\ru.vasiljev.a.a\PostImageUploadTest.java">
           <value>
             <Attribute>
               <option name="separator" value=";" />
