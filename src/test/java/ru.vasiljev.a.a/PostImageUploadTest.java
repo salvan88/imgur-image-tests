@@ -24,9 +24,7 @@ public class PostImageUploadTest extends BaseTest {
     private PostImageUploadResponse response;
     private String delImageHash;
 
-    /**
-     * Позитивные тесты
-     **/
+    /* Позитивные тесты */
 
     @Test
     @Step("Тест")
@@ -93,9 +91,7 @@ public class PostImageUploadTest extends BaseTest {
         delImageHash = response.getData().getDeletehash();
     }
 
-    /**
-     * Негативные тесты
-     **/
+    /* Негативные тесты */
 
     @Test
     @Step("Тест")

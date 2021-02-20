@@ -26,7 +26,6 @@ public class BaseTest {
     static ResponseSpecification respNegSpec;
     static ResponseSpecification respNoAuthSpec;
 
-
     @BeforeAll
     static void beforeAll() {
         loadProperties();
