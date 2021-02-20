@@ -24,6 +24,8 @@ public class BaseTest {
     static RequestSpecification reqAuthSpec;
     static ResponseSpecification respPosSpec;
     static ResponseSpecification respNegSpec;
+    static ResponseSpecification respNoAuthSpec;
+
 
     @BeforeAll
     static void beforeAll() {
@@ -37,6 +39,8 @@ public class BaseTest {
         reqAuthSpec = createAuthReqSpec();
         respPosSpec = createPositiveRespSpec();
         respNegSpec = createNegativeRespSpec();
+        respNoAuthSpec = createNegativeNoAuthRespSpec();
+
     }
 
     static RequestSpecification createAuthReqSpec() {
@@ -50,7 +54,7 @@ public class BaseTest {
                 .expectStatusCode(200)
                 .expectStatusLine("HTTP/1.1 200 OK")
                 .expectBody("success", is(true))
-                .expectBody("data.id", is(notNullValue()))
+                .expectBody("data", is(notNullValue()))
                 .expectContentType(ContentType.JSON)
                 .build();
     }
@@ -59,6 +63,15 @@ public class BaseTest {
         return respNegSpec = new ResponseSpecBuilder()
                 .expectStatusCode(400)
                 .expectStatusLine("HTTP/1.1 400 Bad Request")
+                .expectBody("success", is(false))
+                .expectContentType(ContentType.JSON)
+                .build();
+    }
+
+    static ResponseSpecification createNegativeNoAuthRespSpec() {
+        return respNoAuthSpec = new ResponseSpecBuilder()
+                .expectStatusCode(401)
+                .expectStatusLine("HTTP/1.1 401 Unauthorized")
                 .expectBody("success", is(false))
                 .expectContentType(ContentType.JSON)
                 .build();

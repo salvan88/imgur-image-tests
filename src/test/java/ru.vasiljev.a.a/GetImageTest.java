@@ -7,36 +7,30 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.valijev.a.a.Endpoints;
+import ru.valijev.a.a.Errors;
 import ru.valijev.a.a.dto.GetImageResponse;
 import ru.valijev.a.a.dto.PostImageUploadResponse;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
+import static ru.valijev.a.a.steps.CommonRequest.uploadCommonImage;
 
 @DisplayName("GET image test case")
 public class GetImageTest extends BaseTest {
 
     private String imageHash;
     private String delImageHash;
-    private final String imageURL = "https://is.gd/fqQYK4";
+    private PostImageUploadResponse response;
 
 
     @BeforeEach
-    @Step("Подготовка")
     void setUp() {
-        PostImageUploadResponse response = given()
-                .filter(new AllureRestAssured())
-                .spec(reqAuthSpec)
-                .multiPart("image", imageURL)
-                .when()
-                .post(Endpoints.POST_IMAGE_REQUEST)
-                .then()
-                .extract()
-                .body()
-                .as(PostImageUploadResponse.class);
 
+        response = uploadCommonImage(reqAuthSpec);
+        delImageHash = response.getData().getDeletehash();
         imageHash = response.getData().getId();
+
     }
 
     @Test
@@ -45,8 +39,6 @@ public class GetImageTest extends BaseTest {
     void getImageExistTest() {
         GetImageResponse response = given()
                 .filter(new AllureRestAssured())
-                .log()
-                .all()
                 .spec(reqAuthSpec)
                 .when()
                 .get(Endpoints.GET_EXIST_IMAGE_REQUEST, imageHash)
@@ -68,11 +60,12 @@ public class GetImageTest extends BaseTest {
                 .filter(new AllureRestAssured())
                 .spec(reqAuthSpec)
                 .expect()
-                .body("success", is(false))
-                .body("status", is(400))
+                .body("data.error", is(Errors.imageIdReq.message))
                 .when()
                 .get(Endpoints.GET_NOT_EXIST_IMAGE_REQUEST)
-                .prettyPeek();
+                .prettyPeek()
+                .then()
+                .spec(respNegSpec);
     }
 
     @AfterEach

@@ -2,40 +2,30 @@ package ru.vasiljev.a.a;
 
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
-import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import ru.valijev.a.a.dto.PostImageUploadResponse;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
+import static ru.valijev.a.a.steps.CommonRequest.uploadCommonImage;
 
 @DisplayName("POST update image test case")
 public class PostUpdateImageTest extends BaseTest {
 
     private String imageHash;
     private String delImageHash;
-    private final String imageURL = "https://is.gd/fqQYK4";
-
+    private PostImageUploadResponse response;
 
     @BeforeEach
     @Step("Подготовка")
     void setUp() {
-        JsonPath result = given()
-                .filter(new AllureRestAssured())
-                .headers("Authorization", token)
-                .multiPart("image", imageURL)
-                .when()
-                .post("/image")
-                .then()
-                .statusCode(200)
-                .extract()
-                .response()
-                .jsonPath();
 
-        imageHash = result.getString("data.id");
-        delImageHash = result.getString("data.deletehash");
+        response = uploadCommonImage(reqAuthSpec);
+        delImageHash = response.getData().getDeletehash();
+        imageHash = response.getData().getId();
+
     }
 
     @Test
@@ -44,15 +34,13 @@ public class PostUpdateImageTest extends BaseTest {
     void postUpdateImageTitleAuthedTest() {
         given()
                 .filter(new AllureRestAssured())
-                .headers("Authorization", token)
+                .spec(reqAuthSpec)
                 .multiPart("title", "123")
-                .expect()
-                .body("success", is(true))
                 .when()
                 .post("/image/{imageHash}", imageHash)
                 .prettyPeek()
                 .then()
-                .statusCode(200);
+                .spec(respPosSpec);
 
     }
 
@@ -62,15 +50,13 @@ public class PostUpdateImageTest extends BaseTest {
     void postUpdateImageDescriptionAuthedTest() {
         given()
                 .filter(new AllureRestAssured())
-                .headers("Authorization", token)
+                .spec(reqAuthSpec)
                 .multiPart("description", "321")
-                .expect()
-                .body("success", is(true))
                 .when()
                 .post("/image/{imageHash}", imageHash)
                 .prettyPeek()
                 .then()
-                .statusCode(200);
+                .spec(respPosSpec);
     }
 
     @Test
@@ -80,13 +66,11 @@ public class PostUpdateImageTest extends BaseTest {
         given()
                 .filter(new AllureRestAssured())
                 .multiPart("description", "321")
-                .expect()
-                .body("success", is(false))
                 .when()
                 .post("/image/{imageHash}", imageHash)
                 .prettyPeek()
                 .then()
-                .statusCode(401);
+                .spec(respNoAuthSpec);
 
     }
 
@@ -96,7 +80,7 @@ public class PostUpdateImageTest extends BaseTest {
     void tearDown() {
         given()
                 .filter(new AllureRestAssured())
-                .headers("Authorization", token)
+                .spec(reqAuthSpec)
                 .when()
                 .delete("/image/{delImageHash}", delImageHash)
                 .prettyPeek()
