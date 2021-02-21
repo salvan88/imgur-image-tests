@@ -4,7 +4,6 @@ package ru.vasiljev.a.a;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.valijev.a.a.Endpoints;

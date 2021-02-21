@@ -1,0 +1,5 @@
+image,expected
+src/test/resources/1.jpg,image/jpeg
+src/test/resources/1.png,image/png
+src/test/resources/jpegExample.jpeg,image/jpeg
+src/test/resources/tenor.gif,image/gif
