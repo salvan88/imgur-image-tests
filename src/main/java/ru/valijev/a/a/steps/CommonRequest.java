@@ -4,7 +4,7 @@ package ru.valijev.a.a.steps;
 import io.restassured.builder.MultiPartSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import lombok.experimental.UtilityClass;
-import ru.valijev.a.a.Images;
+import ru.valijev.a.a.enums.Images;
 import ru.valijev.a.a.dto.PostImageUploadResponse;
 import ru.valijev.a.a.utils.FileEncodingUtils;
 

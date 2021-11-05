@@ -1,5 +1,6 @@
 package ru.vasiljev.a.a;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -74,6 +75,17 @@ public class BaseTest {
                 .expectBody("success", is(false))
                 .expectContentType(ContentType.JSON)
                 .build();
+    }
+
+    static void deleteImage(String delImageHash) {
+        RestAssured.given()
+                .filter(new AllureRestAssured())
+                .spec(reqAuthSpec)
+                .when()
+                .delete("/image/{delImageHash}", delImageHash)
+                .prettyPeek()
+                .then()
+                .statusCode(200);
     }
 
     static void loadProperties()  {

@@ -7,7 +7,7 @@ import io.qameta.allure.restassured.AllureRestAssured;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.valijev.a.a.Endpoints;
-import ru.valijev.a.a.Images;
+import ru.valijev.a.a.enums.Images;
 import ru.valijev.a.a.dto.GetImageResponse;
 import ru.valijev.a.a.dto.PostImageUploadResponse;
 import ru.valijev.a.a.utils.FileEncodingUtils;
@@ -79,13 +79,6 @@ public class IntegUplUpdGetDelTest extends BaseTest {
 
         /* Удаление изображения */
 
-        given()
-                .filter(new AllureRestAssured())
-                .spec(reqAuthSpec)
-                .when()
-                .delete("/image/{delImageHash}", delImageHash)
-                .prettyPeek()
-                .then()
-                .statusCode(200);
+        deleteImage(delImageHash);
     }
 }

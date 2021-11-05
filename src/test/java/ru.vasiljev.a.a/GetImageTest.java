@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.valijev.a.a.Endpoints;
-import ru.valijev.a.a.Errors;
+import ru.valijev.a.a.enums.Errors;
 import ru.valijev.a.a.dto.GetImageResponse;
 import ru.valijev.a.a.dto.PostImageUploadResponse;
 
@@ -22,7 +22,6 @@ public class GetImageTest extends BaseTest {
     private String imageHash;
     private String delImageHash;
     private PostImageUploadResponse response;
-
 
     @BeforeEach
     void setUp() {
@@ -72,13 +71,6 @@ public class GetImageTest extends BaseTest {
     @Step("Удаление мусора")
     @DisplayName("Удаление мусора")
     void tearDown() {
-        given()
-                .filter(new AllureRestAssured())
-                .spec(reqAuthSpec)
-                .when()
-                .delete(Endpoints.DELETE_IMAGE_REQUEST, delImageHash)
-                .prettyPeek()
-                .then()
-                .statusCode(200);
+        deleteImage(delImageHash);
     }
 }

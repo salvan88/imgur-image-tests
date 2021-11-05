@@ -20,7 +20,6 @@ public class DeleteImageTest extends BaseTest {
     @BeforeEach
     @Step("Подготовка")
     void setUp() {
-
         response = uploadCommonImage(reqAuthSpec);
         delImageHash = response.getData().getDeletehash();
     }
@@ -56,13 +55,6 @@ public class DeleteImageTest extends BaseTest {
     @Step("Удаление мусора")
     @DisplayName("Удаление мусора")
     void tearDown() {
-        given()
-                .filter(new AllureRestAssured())
-                .headers("Authorization", token)
-                .when()
-                .delete("/image/{delImageHash}", delImageHash)
-                .prettyPeek()
-                .then()
-                .statusCode(200);
+        deleteImage(delImageHash);
     }
 }

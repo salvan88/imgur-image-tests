@@ -1,4 +1,4 @@
-package ru.valijev.a.a;
+package ru.valijev.a.a.enums;
 
 public enum Images {
 

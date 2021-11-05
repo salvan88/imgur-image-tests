@@ -78,13 +78,6 @@ public class PostUpdateImageTest extends BaseTest {
     @Step("Удаление мусора")
     @DisplayName("Удаление мусора")
     void tearDown() {
-        given()
-                .filter(new AllureRestAssured())
-                .spec(reqAuthSpec)
-                .when()
-                .delete("/image/{delImageHash}", delImageHash)
-                .prettyPeek()
-                .then()
-                .statusCode(200);
+        deleteImage(delImageHash);
     }
 }

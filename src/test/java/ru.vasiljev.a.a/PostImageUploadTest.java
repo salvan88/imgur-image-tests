@@ -7,8 +7,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.valijev.a.a.Endpoints;
-import ru.valijev.a.a.Errors;
-import ru.valijev.a.a.Images;
+import ru.valijev.a.a.enums.Errors;
+import ru.valijev.a.a.enums.Images;
 import ru.valijev.a.a.dto.PostImageUploadResponse;
 import ru.valijev.a.a.utils.FileEncodingUtils;
 
@@ -183,15 +183,7 @@ public class PostImageUploadTest extends BaseTest {
     @DisplayName("Удаление мусора")
     void tearDown() {
         if(delImageHash != null) {
-            given()
-                    .filter(new AllureRestAssured())
-                    .spec(reqAuthSpec)
-                    .when()
-                    .delete(Endpoints.DELETE_IMAGE_REQUEST, delImageHash)
-                    .prettyPeek()
-                    .then()
-                    .statusCode(200);
+            deleteImage(delImageHash);
         }
-
     }
 }
