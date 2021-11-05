@@ -2,33 +2,26 @@ package ru.vasiljev.a.a;
 
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import ru.valijev.a.a.dto.PostImageUploadResponse;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static ru.valijev.a.a.steps.CommonRequest.uploadCommonImage;
 
 @DisplayName("DELETE image test case")
 public class DeleteImageTest extends BaseTest {
 
     private String delImageHash;
-    private final String imageURL = "https://is.gd/fqQYK4";
+    private PostImageUploadResponse response;
 
     @BeforeEach
     @Step("Подготовка")
     void setUp() {
-        delImageHash = given()
-                .filter(new AllureRestAssured())
-                .headers("Authorization", token)
-                .multiPart("image", imageURL)
-                .when()
-                .post("/image")
-                .prettyPeek()
-                .then()
-                .extract()
-                .response()
-                .jsonPath()
-                .getString("data.deletehash");
+        response = uploadCommonImage(reqAuthSpec);
+        delImageHash = response.getData().getDeletehash();
     }
 
     @Test
@@ -37,14 +30,11 @@ public class DeleteImageTest extends BaseTest {
     void deleteImageNoAuthedTest() {
         given()
                 .filter(new AllureRestAssured())
-                .expect()
-                .body("data", is(notNullValue()))
-                .body("success", is(false))
                 .when()
                 .delete("/image/{imageHash}", delImageHash)
                 .prettyPeek()
                 .then()
-                .statusCode(401);
+                .spec(respNoAuthSpec);
     }
 
     @Test
@@ -53,10 +43,7 @@ public class DeleteImageTest extends BaseTest {
     void deleteImageAuthedTest() {
         given()
                 .filter(new AllureRestAssured())
-                .headers("Authorization", token)
-                .expect()
-                .body("data", is(true))
-                .body("success", is(true))
+                .spec(reqAuthSpec)
                 .when()
                 .delete("/image/{delImageHash}", delImageHash)
                 .prettyPeek()
@@ -68,13 +55,6 @@ public class DeleteImageTest extends BaseTest {
     @Step("Удаление мусора")
     @DisplayName("Удаление мусора")
     void tearDown() {
-            given()
-                    .filter(new AllureRestAssured())
-                    .headers("Authorization", token)
-                    .when()
-                    .delete("/image/{delImageHash}", delImageHash)
-                    .prettyPeek()
-                    .then()
-                    .statusCode(200);
+        deleteImage(delImageHash);
     }
 }

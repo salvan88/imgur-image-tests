@@ -6,67 +6,71 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import ru.valijev.a.a.Endpoints;
+import ru.valijev.a.a.enums.Errors;
+import ru.valijev.a.a.dto.GetImageResponse;
+import ru.valijev.a.a.dto.PostImageUploadResponse;
 
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static ru.valijev.a.a.steps.CommonRequest.uploadCommonImage;
 
 @DisplayName("GET image test case")
 public class GetImageTest extends BaseTest {
 
     private String imageHash;
     private String delImageHash;
-    private final String imageURL = "https://is.gd/fqQYK4";
+    private PostImageUploadResponse response;
 
     @BeforeEach
-    @Step("Подготовка")
     void setUp() {
-        imageHash = given()
-                .filter(new AllureRestAssured())
-                .headers("Authorization", token)
-                .multiPart("image", imageURL)
-                .when()
-                .post("/image")
-                .then()
-                .statusCode(200)
-                .extract()
-                .response()
-                .jsonPath()
-                .getString("data.id");
+
+        response = uploadCommonImage(reqAuthSpec);
+        delImageHash = response.getData().getDeletehash();
+        imageHash = response.getData().getId();
+
     }
 
     @Test
     @Step("Тест")
     @DisplayName("(+) Получение изображения")
     void getImageExistTest() {
-        delImageHash = given()
+        GetImageResponse response = given()
                 .filter(new AllureRestAssured())
-                .headers("Authorization", token)
-                .expect()
-                .body("success", is(true))
-                .body("data.id", is(notNullValue()))
+                .spec(reqAuthSpec)
                 .when()
-                .get("/image/{imageHash}", imageHash)
+                .get(Endpoints.GET_EXIST_IMAGE_REQUEST, imageHash)
                 .prettyPeek()
                 .then()
-                .statusCode(200)
                 .extract()
-                .response()
-                .jsonPath()
-                .getString("data.deletehash");
+                .body()
+                .as(GetImageResponse.class);
+
+        assertThat(response.getData().getAccountId().toString()).isEqualTo("145276575");
+        delImageHash = response.getData().getDeletehash();
+    }
+
+    @Test
+    @Step("Тест")
+    @DisplayName("(-) Получение несуществующего изображения")
+    void getImageNotExistTest() {
+        given()
+                .filter(new AllureRestAssured())
+                .spec(reqAuthSpec)
+                .expect()
+                .body("data.error", is(Errors.imageIdReq.message))
+                .when()
+                .get(Endpoints.GET_NOT_EXIST_IMAGE_REQUEST)
+                .prettyPeek()
+                .then()
+                .spec(respNegSpec);
     }
 
     @AfterEach
     @Step("Удаление мусора")
     @DisplayName("Удаление мусора")
     void tearDown() {
-        given()
-                .filter(new AllureRestAssured())
-                .headers("Authorization", token)
-                .when()
-                .delete("/image/{delImageHash}", delImageHash)
-                .prettyPeek()
-                .then()
-                .statusCode(200);
+        deleteImage(delImageHash);
     }
 }
