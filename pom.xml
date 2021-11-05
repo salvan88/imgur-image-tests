@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <jdk.version>13</jdk.version>
+        <jdk.version>11</jdk.version>
         <allure-maven.version>2.10.0</allure-maven.version>
         <aspectj.version>1.9.6</aspectj.version>
         <jackson.version>2.13.0</jackson.version>
