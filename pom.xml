@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jdk.version>11</jdk.version>
         <allure-maven.version>2.10.0</allure-maven.version>
         <aspectj.version>1.9.6</aspectj.version>
