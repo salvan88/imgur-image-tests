@@ -27,6 +27,7 @@ public class GetImageTest extends BaseTest {
     void setUp() {
 
         response = uploadCommonImage(reqAuthSpec);
+
         delImageHash = response.getData().getDeletehash();
         imageHash = response.getData().getId();
 
